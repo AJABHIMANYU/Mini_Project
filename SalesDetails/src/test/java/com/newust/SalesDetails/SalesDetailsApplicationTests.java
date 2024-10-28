@@ -1,0 +1,13 @@
+package com.newust.SalesDetails;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class SalesDetailsApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
