@@ -53,7 +53,7 @@ services:
   car-sr:
     image: car-service
     build: ./CarDetails
-    container_name: car-service
+    container_name: car-sr
     ports:
       - "8054:8054"
     networks:
