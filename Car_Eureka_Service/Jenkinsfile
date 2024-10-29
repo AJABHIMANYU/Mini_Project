@@ -1,4 +1,6 @@
-    tools{
+pipeline {
+    agent any
+    tools {
         maven 'my-maven'
         jdk 'my-jdk'
     }
@@ -6,13 +8,13 @@
     stages {
         stage('Git') {
             steps {
-                echo 'Pull code from github'
-                git url : 'https://github.com/AJABHIMANYU/Mini_Project.git',branch:'main'
+                echo 'Pull code from GitHub'
+                git url: 'https://github.com/AJABHIMANYU/car-eureka.git', branch: 'master'
             }
         }
         stage('Build') {
             steps {
-                echo 'Build project using maven'
+                echo 'Build project using Maven'
                 bat "mvn clean install -DskipTests"
             }
         }
@@ -22,8 +24,8 @@
                 bat "mvn test"
             }
         }
-        stage('Deploy'){
-            steps{
+        stage('Deploy') {
+            steps {
                 echo 'Deploy the project'
                 bat 'docker rm -f eureka-server-sr || true'
                 bat 'docker rmi -f eureka-server || true'
