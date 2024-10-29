@@ -37,7 +37,7 @@ services:
   
 
   sales-sr:
-    image: car-service
+    image: sales-service
     build: ./SalesDetails
     container_name: sales-sr
     ports:
