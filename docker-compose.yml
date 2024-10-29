@@ -1,0 +1,70 @@
+version: "3"
+services:
+  eureka-server-sr:
+    image: eureka-server
+    build: ./Car_Eureka_Service
+    container_name: eureka-server-sr
+    ports:
+      - "8761:8761"
+    networks:
+      - app-network
+
+
+
+  api-gateway-sr:
+    image: api-gateway
+    build: ./CarApiGateway
+    ports:
+      - "6565:6565"
+    networks:
+      - app-network
+    depends_on:
+      - eureka-server-sr
+
+
+  authentication-sr:
+    image: authentication-service
+    build: ./Car-authentication
+    container_name: authentication-sr
+    ports:
+      - "8011:8011"
+    networks:
+      - app-network
+    depends_on:
+      - eureka-server-sr
+      - api-gateway-sr
+
+  
+
+  sales-sr:
+    image: car-service
+    build: ./SalesDetails
+    container_name: sales-sr
+    ports:
+      - "9869:9869"
+    networks:
+      - app-network
+    depends_on:
+      - eureka-server-sr
+      - api-gateway-sr
+      - authentication-sr
+
+
+  car-sr:
+    image: car-service
+    build: ./CarDetails
+    container_name: car-service
+    ports:
+      - "8054:8054"
+    networks:
+      - app-network
+    depends_on:
+      - eureka-server-sr
+      - api-gateway-sr
+      - authentication-sr
+      - sales-sr
+
+
+networks:
+  app-network:
+
